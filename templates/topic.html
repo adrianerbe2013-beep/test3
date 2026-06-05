@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="card">
+        <h2>{{ topic.title }}</h2>
+        <p>{{ topic.content }}</p>
+        <a href="/">⬅ Назад к списку тем</a>
+    </div>
+
+    <div class="card">
+        <h3>Комментарии ({{ topic.comments|length }}):</h3>
+        <ul>
+            {% for comment in topic.comments %}
+                <li>{{ comment }}</li>
+            {% empty %}
+                <p>Пока нет комментариев. Будьте первым!</p>
+            {% endfor %}
+        </ul>
+
+        <hr>
+        <form action="/topic/{{ topic_id }}" method="POST">
+            <textarea name="comment" placeholder="Напишите комментарий..." rows="3" required></textarea>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+{% endblock %}

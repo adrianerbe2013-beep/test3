@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="card">
+        <h2>Создать новую тему</h2>
+        <form action="/create" method="POST">
+            <input type="text" name="title" placeholder="Название темы" required>
+            <textarea name="content" placeholder="Текст сообщения..." rows="4" required></textarea>
+            <button type="submit">Опубликовать</button>
+        </form>
+    </div>
+
+    <h2>Список тем:</h2>
+    {% for id, topic in topics.items() %}
+        <div class="card">
+            <h3><a href="/topic/{{ id }}">{{ topic.title }}</a></h3>
+            <p>{{ topic.content[:150] }}...</p>
+            <small>Комментариев: {{ topic.comments|length }}</small>
+        </div>
+    {% endfor %}
+{% endblock %}
